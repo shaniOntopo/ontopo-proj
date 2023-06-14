@@ -1,0 +1,56 @@
+type User {
+  id: ID!
+  username: String!
+  hashedPassword: String!
+  hashedRefreshToken: String
+  name: String!
+  mail: String!
+  phone: String!
+}
+
+input SignUpUser {
+  username: String!
+  password: String!
+  name: String!
+  mail: String!
+  phone: String!
+}
+
+input NewUser {
+  username: String!
+  hashedPassword: String!
+  hashedRefreshToken: String
+  name: String!
+  mail: String!
+  phone: String!
+}
+
+input UpdateUser {
+  id: ID!
+  username: String
+  name: String
+  mail: String
+  phone: String
+}
+
+type Query {
+  Users: [User!]!
+  User(id: ID!): User
+}
+
+type Mutation {
+  createUser(input: NewUser!): User!
+  updateUser(input: UpdateUser!): User
+  deleteUser(id: ID!): User
+  signUp(input: SignUpUser!): SignResponseDto!
+}
+
+type Subscription {
+  UserCreated: User
+}
+
+type SignResponseDto {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}

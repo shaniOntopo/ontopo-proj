@@ -1,0 +1,51 @@
+type User {
+  id: ID!
+  username: String!
+  hashedPassword: String!
+  hashedRefreshToken: String
+  name: String!
+  mail: String!
+  phone: String!
+}
+
+input SignUpUser {
+  username: String!
+  password: String!
+  name: String!
+  mail: String!
+  phone: String!
+}
+
+input SignInUser {
+  mail: String!
+  password: String!
+}
+
+type SignResponseDto {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+type LogoutResponseDto {
+  loggedOut: Boolean!
+}
+
+type NewTokensResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input GetNewTokensInput {
+  userId: String
+  refreshToken: String
+}
+
+scalar Request
+
+type Mutation {
+  signUp(input: SignUpUser!): SignResponseDto!
+  signIn(input: SignInUser!): SignResponseDto!
+  logOut(id: ID!): LogoutResponseDto!
+  getNewTokens: NewTokensResponse
+}
